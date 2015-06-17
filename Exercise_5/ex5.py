@@ -1,1 +1,134 @@
-# CSC148 Exercise 5, Joshua Fung June 17th,2015
+# CSC148 Exercise 5
+# Joshua Fung June 17th,2015
+
+
+class DLLNode(object):
+    '''A class for a double linked list node
+    Contain data, prev_node, and next_node
+    
+    If no node is provided it will set them as None
+    '''
+
+    def __init__(self, data, prev_node = None, next_node = None):
+        '''(Object, DLLNode, DLLNode) -> NoType
+        
+        Data must be prvided, node will be set to None if not provided
+        '''
+        #I would like data, pre_node and next_node as a private variable
+        self.data = data
+        self.prev_node = prev_node
+        self.next_node = next_node
+
+    def __str__(self):
+        '''(NoType) -> str
+        
+        Print the data
+        '''
+        return str(self.data)
+
+    def get_data(self):
+        '''(NoType) -> object
+
+        Return data
+        '''
+        return self.data
+        
+    def get_prev(self):
+        '''(NoType) -> DLLNode
+        
+        Return prev_node
+        '''
+        return self.prev_node
+    
+    def get_next(self):
+        '''(NoType) -> DLLNode
+
+        Return next_node
+        '''
+        return self.next_node
+    
+    def change_prev(self, prev_node):
+        '''(NoType) -> NoType
+        
+        Change prev_node
+        '''
+        self.prev_node = prev_node
+        
+    def change_next(self, next_node):
+        '''(NoType) -> NoType
+
+        Change next_node
+        '''
+        self.next_node = next_node
+
+
+class DLList(object):
+    '''Double linked list
+
+    Initialized empty
+    
+    Method:
+    add_to_head
+    add_to_tail
+    remove_head
+    remove_tail
+    search
+    '''
+
+    def __init__(self):
+        '''(NoType) -> NoType
+        
+        Init a empty list
+        '''
+        self._head = None
+
+    def __str__(self):
+        '''(NoType) -> str
+
+        Print the whole list
+        '''
+        list_content = ""
+        current = self._head
+
+        while(current != None):
+            list_content = list_content + str(current.get_data()) + " -> " 
+            current = current.get_next()
+
+        list_content = list_content + "None"
+        return list_content
+    
+    def add_to_head(self, data):
+        '''(Object) -> NoType
+
+        Add an object to the head
+        '''
+        new_node = DLLNode(data, None, self._head)
+        new_node.get_next().change_prev(self._head)
+        self._head = new_node
+            
+    def add_to_tail(self, data):
+        '''(Object) -> NoType
+
+        Add an object to the tail
+        '''
+
+    def remove_head(self):
+        '''(NoType) -> Object
+
+        Return and remove object from head
+        '''
+
+    def remove_tail(self):
+        '''(NoType) -> Object
+
+        Return and remove object from tail
+        '''
+
+    def search(self, data):
+        '''(Object) -> int
+
+        Return the index of the search object
+        If none return -1
+        '''
+        
+        
