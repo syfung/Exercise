@@ -1,7 +1,5 @@
 # CSC148 Exercise 5
 # Joshua Fung June 17th,2015
-
-
 class DLLNode(object):
     '''A class for a double linked list node
     Contain data, prev_node, and next_node
@@ -62,6 +60,10 @@ class DLLNode(object):
         self.next_node = next_node
 
 
+class EmptyListError(Exception):
+    '''Raise this error when list is empty'''
+
+    
 class DLList(object):
     '''Double linked list
 
