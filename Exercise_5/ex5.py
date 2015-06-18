@@ -137,7 +137,16 @@ class DLList(object):
             raise EmptyListError
 
         else:
-            
+            head = self._head
+            data = self._head.get_data()
+            self._head = head.get_next()
+
+            if(self._head is not None):
+                self._head.change_prev(None)
+
+            del head
+            return data
+
     def remove_tail(self):
         '''(NoType) -> Object
 
@@ -147,12 +156,39 @@ class DLList(object):
             raise EmptyListError
 
         else:
-            
+            current = self._head
+            if(current.get_next() is None):
+                data = current.get_data()
+                del current
+                self._head = None
+
+            else:
+                while(current.get_next() is not None):
+                    current = current.get_next()
+
+                data = current.get_data()
+                current.get_prev().change_next(None)
+                del current
+
+            return data
+
     def search(self, data):
         '''(Object) -> int
 
         Return the index of the search object
         If none return -1
         '''
-        
+        counter = 0
+        current = self._head
+
+        while(current is not None):
+
+            if(current.get_data() == data):
+                return counter
+
+            else:
+                current = current.get_next()
+                counter = counter + 1
+
+        return -1
         
