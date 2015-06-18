@@ -20,7 +20,7 @@ class DLLNode(object):
     def __str__(self):
         '''(NoType) -> str
         
-        Print the data
+        Print the data when printed
         '''
         return str(self.data)
 
@@ -93,7 +93,9 @@ class DLList(object):
         current = self._head
 
         while(current != None):
-            list_content = list_content + str(current.get_data()) + " -> " 
+            list_content = list_content + str(current.get_data())
+            list_content = list_content + " (" + str(current.get_prev())
+            list_content = list_content + ", " + str(current.get_next()) + ") -> "
             current = current.get_next()
 
         list_content = list_content + "None"
@@ -104,28 +106,48 @@ class DLList(object):
 
         Add an object to the head
         '''
-        new_node = DLLNode(data, None, self._head)
-        new_node.get_next().change_prev(self._head)
-        self._head = new_node
+        if(self._head is None):
+            self._head = DLLNode(data)
+
+        else:
+            new_node = DLLNode(data, None, self._head)
+            self._head = new_node
             
     def add_to_tail(self, data):
         '''(Object) -> NoType
 
         Add an object to the tail
         '''
+        if(self._head is None):
+            self._head = DLLNode(data)
+
+        else:
+            current = self._head
+            while(current.get_next() is not None):
+                current = current.get_next()
+
+            current.change_next(DLLNode(data, current, None))
 
     def remove_head(self):
         '''(NoType) -> Object
 
         Return and remove object from head
         '''
+        if(self._head is None):
+            raise EmptyListError
 
+        else:
+            
     def remove_tail(self):
         '''(NoType) -> Object
 
         Return and remove object from tail
         '''
+        if(self._head is None):
+            raise EmptyListError
 
+        else:
+            
     def search(self, data):
         '''(Object) -> int
 
