@@ -192,4 +192,6 @@ class DLList(object):
 
         return -1
 
-    
+
+class SortedList(object):
+    '''A sorted list class'''
