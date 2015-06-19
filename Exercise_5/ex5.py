@@ -331,3 +331,7 @@ class SortedList(object):
 
         # Return the element at the index
         return self._list.getitem(index)
+
+    def binary_search(self, data):
+        '''(Object) -> int
+        '''
