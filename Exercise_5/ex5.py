@@ -221,7 +221,7 @@ class DLList(object):
         '''
         if(self._head is None):
             self._head = DLLNode(data)
-        
+
         elif(self._head.get_data() > data):
             self._head = DLLNode(data, None, self._head)
             self._head.get_next().change_prev(self._head)
@@ -236,7 +236,7 @@ class DLList(object):
                 current = current.get_next()
 
             new_node = DLLNode(data, current.get_prev(), current)
-            
+
             if(current.get_prev() is not None):
                 current.get_prev().change_next(new_node)
             current.change_prev(new_node)
