@@ -255,7 +255,7 @@ class DLList(object):
                 self._head.change_prev(None)
                 del current
                 return None
-            
+
             while(current is not None):
                 if(current.get_data() == data):
                     if(current.get_prev() is not None):
@@ -308,7 +308,7 @@ class SortedList(object):
         Add data in a non-decreasing order
         '''
         self._list.sorted_add(data)
-        
+
     def remove(self, data):
         '''(Object) -> NoType
         Remove the specified data out of the list
