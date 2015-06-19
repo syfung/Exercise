@@ -55,7 +55,7 @@ class DLLNode(object):
 
 
 class DLList(object):
-    '''Double linked list
+    '''Double linked list class, also used for a sorted list
     Initialized empty
 
     Method:
