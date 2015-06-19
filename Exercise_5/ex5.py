@@ -64,6 +64,9 @@ class DLList(object):
     remove_head
     remove_tail
     search
+    count
+    sorted_add
+    remove_item
     '''
 
     def __init__(self):
