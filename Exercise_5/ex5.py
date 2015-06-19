@@ -1,4 +1,4 @@
-# CSC148 Exercise 5
+# CSC148 Exercise 5, Double Linked List and Sorted List
 # Joshua Fung June 17th,2015
 
 
