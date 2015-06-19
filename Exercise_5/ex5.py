@@ -10,9 +10,9 @@ class DLLNode(object):
 
     def __init__(self, data, prev_node=None, next_node=None):
         '''(Object, DLLNode, DLLNode) -> NoType
-        Data must be prvided, node will be set to None if not provided
+        Data must be provided, node will be set to None if not provided
         '''
-        # I would like data, pre_node and next_node as a private variable
+        # I would like data, prev_node and next_node as a private variable
         self.data = data
         self.prev_node = prev_node
         self.next_node = next_node
@@ -221,8 +221,8 @@ class DLList(object):
         '''
         if(self._head is None):
             self._head = DLLNode(data)
-
-        if(self._head.get_data() > data):
+        
+        elif(self._head.get_data() > data):
             self._head = DLLNode(data, None, self._head)
             self._head.get_next().change_prev(self._head)
 
@@ -236,6 +236,7 @@ class DLList(object):
                 current = current.get_next()
 
             new_node = DLLNode(data, current.get_prev(), current)
+            
             if(current.get_prev() is not None):
                 current.get_prev().change_next(new_node)
             current.change_prev(new_node)
@@ -243,7 +244,7 @@ class DLList(object):
 
     def remove_item(self, data):
         '''(Object) -> NoType
-        Remove specfied data
+        Remove specified data
         '''
         if(self._head is None):
             raise EmptyListError
@@ -252,7 +253,8 @@ class DLList(object):
             current = self._head
             if(current.get_data() == data):
                 self._head = current.get_next()
-                self._head.change_prev(None)
+                if(self._head is not None):
+                    self._head.change_prev(None)
                 del current
                 return None
 
@@ -284,7 +286,7 @@ class IndexOutOfBoundError(Exception):
 
 
 class RemoveNonExistItemError(Exception):
-    '''Raise when attemp to remove a item that is not in the list'''
+    '''Raise when attempt to remove a item that is not in the list'''
     pass
 
 
