@@ -3,13 +3,11 @@
 class DLLNode(object):
     '''A class for a double linked list node
     Contain data, prev_node, and next_node
-    
     If no node is provided it will set them as None
     '''
 
     def __init__(self, data, prev_node = None, next_node = None):
         '''(Object, DLLNode, DLLNode) -> NoType
-        
         Data must be prvided, node will be set to None if not provided
         '''
         #I would like data, pre_node and next_node as a private variable
@@ -19,54 +17,43 @@ class DLLNode(object):
 
     def __str__(self):
         '''(NoType) -> str
-        
         Print the data when printed
         '''
         return str(self.data)
 
     def get_data(self):
         '''(NoType) -> object
-
         Return data
         '''
         return self.data
         
     def get_prev(self):
         '''(NoType) -> DLLNode
-        
         Return prev_node
         '''
         return self.prev_node
     
     def get_next(self):
         '''(NoType) -> DLLNode
-
         Return next_node
         '''
         return self.next_node
     
     def change_prev(self, prev_node):
         '''(NoType) -> NoType
-        
         Change prev_node
         '''
         self.prev_node = prev_node
         
     def change_next(self, next_node):
         '''(NoType) -> NoType
-
         Change next_node
         '''
         self.next_node = next_node
 
-
-class EmptyListError(Exception):
-    '''Raise this error when list is empty'''
-
     
 class DLList(object):
     '''Double linked list
-
     Initialized empty
     
     Method:
@@ -79,14 +66,12 @@ class DLList(object):
 
     def __init__(self):
         '''(NoType) -> NoType
-        
         Init a empty list
         '''
         self._head = None
 
     def __str__(self):
         '''(NoType) -> str
-
         Print the whole list
         '''
         list_content = ""
@@ -103,7 +88,6 @@ class DLList(object):
     
     def add_to_head(self, data):
         '''(Object) -> NoType
-
         Add an object to the head
         '''
         if(self._head is None):
@@ -115,7 +99,6 @@ class DLList(object):
             
     def add_to_tail(self, data):
         '''(Object) -> NoType
-
         Add an object to the tail
         '''
         if(self._head is None):
@@ -130,7 +113,6 @@ class DLList(object):
 
     def remove_head(self):
         '''(NoType) -> Object
-
         Return and remove object from head
         '''
         if(self._head is None):
@@ -149,7 +131,6 @@ class DLList(object):
 
     def remove_tail(self):
         '''(NoType) -> Object
-
         Return and remove object from tail
         '''
         if(self._head is None):
@@ -174,7 +155,6 @@ class DLList(object):
 
     def search(self, data):
         '''(Object) -> int
-
         Return the index of the search object
         If none return -1
         '''
@@ -192,6 +172,92 @@ class DLList(object):
 
         return -1
 
+    def count(self):
+        '''(NoType) -> int
+        Count the list
+        '''
+        return self._rec_count(self._head)
 
+    def _rec_count(self, head):
+        '''(DLLNode) -> int
+        Recursively count the list
+        '''
+        if(head is not None):
+            return 1 + self._rec_count(head.get_next())
+
+        else:
+            return 0
+
+    def getitem(self, index):
+        '''(int) -> Object
+        Return the object at given index
+        '''
+        if(index > self.count()):
+            raise IndexOutOfBoundError("Index is longer than list")
+        
+        return self._rec_getitem(index, self._head)
+
+    def _rec_getitem(self, index, node):
+        '''(int) -> Object
+        Recursively return the object at given index
+        '''
+        if(index < 1):
+            return node.get_data()
+
+        else:
+            return self._rec_getitem(index - 1, node.get_next())
+
+    def sorted_add():
+
+    def remove_item():
+
+
+class EmptyListError(Exception):
+    '''Raise this error when list is empty'''
+
+    
+class IndexOutOfBoundError(Exception):
+    '''Raise this error when index is outside list'''
+    
+        
 class SortedList(object):
-    '''A sorted list class'''
+    '''A sorted list class, in non-decreasing order'''
+
+    def __init__(self):
+        '''(NoType) -> NoType
+        Init empty list
+        '''
+        self._list = DLList()
+
+    def __str__(self):
+        '''(NoType) -> str
+        Print the whole list
+        '''
+        return str(self._list)
+
+    def add(self, data):
+        '''(Object) -> NoType
+        Add data in a non-decreasing order
+        '''
+
+    def remove(self, data):
+        '''(Object) -> NoType
+        Remove the specified data out of the list
+        '''
+        
+    def middle(self):
+        '''(NoType) -> Object
+        Return the object in the middle of the list
+        if even number return the one closer to the head
+        '''
+        # Count the total length of the list
+        len = self._list.count()
+        
+        # Find the half length, add 0.5 to make it round properly
+        half = (len / 2) + 0.5
+        
+        # Find the index
+        index = int(half - 1)
+        
+        # Return the element at the index
+        return self._list.getitem(index)
