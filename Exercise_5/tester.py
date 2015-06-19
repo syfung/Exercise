@@ -38,4 +38,24 @@ d._list.add_to_head(2)
 d._list.add_to_head(3)
 d._list.add_to_head(4)
 d._list.add_to_head(5)
+
 print(d._list)
+
+e = SortedList()
+
+for x in range(1, 2000):
+    e.add(random.randrange(0,100,1))
+
+e.add(-10)
+e.add(100)
+
+
+print(e)
+
+e.remove(-10)
+
+print(e)
+
+e.remove(100)
+
+print(e)
