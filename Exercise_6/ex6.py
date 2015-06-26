@@ -16,6 +16,11 @@ def rsum(in_list):
 
     Return the sum of the list
     """
+    if(len(in_list) == 1):
+        return in_list[0]
+
+    else:
+        return in_list[0] + rsum(in_list[1:])
 
 
 def rmax(in_list):
