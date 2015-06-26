@@ -40,12 +40,40 @@ def rmax(in_list):
         else:
             return largest_after
 
+        
 def second_smallest(in_list, first_call=True):
     """(list, bool) -> int/list
 
     Return the second smallest of the list
     """
+    if(first_call):
+        return second_smallest(in_list, False)[1]
 
+    else:
+        if(len(in_list) == 2):
+            a = in_list[0]
+            b = in_list[1]
+
+            if(a > b):
+                return [b, a]
+            else:
+                return [a, b]
+
+        else:
+            first_element = in_list[0]
+            next_smallest2 = second_smallest(in_list[1:], False)
+
+            if(first_element >= next_smallest2[1]):
+                return next_smallest2
+
+            elif(first_element < next_smallest2[1] and \
+                 first_element >= next_smallest2[0]):
+                return [next_smallest2[0], first_element]
+
+            else:
+                return [first_element, next_smallest2[0]]
+                
+                
     
 """ This is a more sensible implmentation of the second_smallest but I
 don't like it. So it is commented out.
