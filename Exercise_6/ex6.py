@@ -28,7 +28,17 @@ def rmax(in_list):
 
     Return the max of the list
     """
+    if(len(in_list) == 1):
+        return in_list[0]
 
+    else:
+        first_element = in_list[0]
+        largest_after = rmax(in_list[1:])
+
+        if(first_element >= largest_after):
+            return first_element
+        else:
+            return largest_after
 
 def second_smallest(in_list, first_call=True):
     """(list, bool) -> int/list
