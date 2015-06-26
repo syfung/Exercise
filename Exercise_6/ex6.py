@@ -3,8 +3,8 @@
 Joshua Fung
 June 25th, 2015
 
-Foure function:
-rsum: Reutrn sum
+Four function:
+rsum: Return sum
 rmax: Return max
 second_smallest: Return second smallest
 sum_max_min: Return the sum of max and min
@@ -40,9 +40,9 @@ def rmax(in_list):
         else:
             return largest_after
 
-        
+
 def second_smallest(in_list, first_call=True):
-    """(list, bool) -> int/list
+    """(list, Boole) -> int/list
 
     Return the second smallest of the list
     """
@@ -66,16 +66,46 @@ def second_smallest(in_list, first_call=True):
             if(first_element >= next_smallest2[1]):
                 return next_smallest2
 
-            elif(first_element < next_smallest2[1] and \
+            elif(first_element < next_smallest2[1] and
                  first_element >= next_smallest2[0]):
                 return [next_smallest2[0], first_element]
 
             else:
                 return [first_element, next_smallest2[0]]
-                
-                
-    
-""" This is a more sensible implmentation of the second_smallest but I
+
+
+def sum_max_min(in_list):
+    """(list) -> int
+
+    Return the sum of min and max
+    """
+    min_max = _sum_helper(in_list)
+    return min_max[0] + min_max[1]
+
+
+def _sum_helper(in_list):
+    """(list) -> list
+
+    Return [min, max]
+    """
+    if(len(in_list) == 1):
+        return [in_list[0], in_list[0]]
+
+    else:
+        first_element = in_list[0]
+        next_min_max = _sum_helper(in_list[1:])
+
+        if(first_element > next_min_max[1]):
+            return [next_min_max[0], first_element]
+
+        elif(first_element < next_min_max[0]):
+            return [first_element, next_min_max[1]]
+
+        else:
+            return next_min_max
+
+
+""" This is a more sensible implementation of the second_smallest but I
 don't like it. So it is commented out.
 
 
@@ -84,6 +114,8 @@ def second_smallest(in_list):
 
     Return the second smallest of the list
     ""
+    smallest2 = _sec_sma_helper(in_list)
+    return smallest2[1]
 
 
 def _sec_sma_helper(in_list):
@@ -91,19 +123,26 @@ def _sec_sma_helper(in_list):
 
     Return [smallest, second smallest]
     ""
+    if(len(in_list) == 2):
+            a = in_list[0]
+            b = in_list[1]
+
+            if(a > b):
+                return [b, a]
+            else:
+                return [a, b]
+
+        else:
+            first_element = in_list[0]
+            next_smallest2 = second_smallest(in_list[1:], False)
+
+            if(first_element >= next_smallest2[1]):
+                return next_smallest2
+
+            elif(first_element < next_smallest2[1] and
+                 first_element >= next_smallest2[0]):
+                return [next_smallest2[0], first_element]
+
+            else:
+                return [first_element, next_smallest2[0]]
 """
-
-    
-
-def sum_max_min(in_list):
-    """(list) -> int
-
-    Return the sum of max and min
-    """
-
-
-def _sum_helper(in_list):
-    """(list) -> list
-    
-    Return [max, min]
-    """
