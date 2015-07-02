@@ -49,10 +49,17 @@ def rmax(in_list):
     Return the max of the list
     """
     if(len(in_list) == 1):
-        return in_list[0]
+        if(isinstance(in_list[0], list)):
+            return rmax(in_list[0])
+        else:
+            return in_list[0]
 
     else:
-        first_element = in_list[0]
+        if(isinstance(in_list[0], list)):
+            first_element = rmax(in_list[0])
+        else:
+            first_element = in_list[0]
+
         largest_after = rmax(in_list[1:])
 
         if(first_element >= largest_after):
@@ -75,8 +82,21 @@ def _sec_sma_helper(in_list):
 
     Return [smallest, second smallest]
     """
+    if(len(in_list) == 1):
+        if(isinstance(in_list[0], list)):
+            print("len 1" + in_list[0])
+            return _sec_sma_helper(in_list[0])
+        else:
+            return [None, in_list[0]]
+        
     if(len(in_list) == 2):
+        if(isinstance(in_list[0], list)):
+            a = _sec_sma_helper(in_list[0])
+        else:
             a = in_list[0]
+        if(isinstance(in_list[1], list)):
+            b = _sec_sma_helper(in_list[1])
+        else:
             b = in_list[1]
 
             if(a > b):
@@ -85,8 +105,16 @@ def _sec_sma_helper(in_list):
                 return [a, b]
 
     else:
-        first_element = in_list[0]
+        if(isinstance(in_list[0], list)):
+            print("else, list" + in_list)
+            first_element = _sec_sma_helper(in_list[0])
+        else:
+            first_element = in_list[0]
+
+        
+        print("else, nextsmallest2" + str(in_list[1:]))
         next_smallest2 = _sec_sma_helper(in_list[1:])
+        print(next_smallest2)
 
         if(first_element >= next_smallest2[1]):
             return next_smallest2
