@@ -28,11 +28,19 @@ def rsum(in_list):
 
     Return the sum of the list
     """
+    # We will change this by checking if the element is a list
     if(len(in_list) == 1):
-        return in_list[0]
+        if(isinstance(in_list[0], list)):
+            return rsum(in_list[0])
+        else:
+            return in_list[0]
 
     else:
-        return in_list[0] + rsum(in_list[1:])
+        if(isinstance(in_list[0], list)):
+            return rsum(in_list[0]) + rsum(in_list[1:])
+
+        else:
+            return in_list[0] + rsum(in_list[1:])
 
 
 def rmax(in_list):
@@ -76,19 +84,19 @@ def _sec_sma_helper(in_list):
             else:
                 return [a, b]
 
+    else:
+        first_element = in_list[0]
+        next_smallest2 = _sec_sma_helper(in_list[1:])
+
+        if(first_element >= next_smallest2[1]):
+            return next_smallest2
+
+        elif(first_element < next_smallest2[1] and
+             first_element >= next_smallest2[0]):
+            return [next_smallest2[0], first_element]
+
         else:
-            first_element = in_list[0]
-            next_smallest2 = second_smallest(in_list[1:], False)
-
-            if(first_element >= next_smallest2[1]):
-                return next_smallest2
-
-            elif(first_element < next_smallest2[1] and
-                 first_element >= next_smallest2[0]):
-                return [next_smallest2[0], first_element]
-
-            else:
-                return [first_element, next_smallest2[0]]
+            return [first_element, next_smallest2[0]]
 
 
 def sum_max_min(in_list):
@@ -120,4 +128,3 @@ def _sum_helper(in_list):
 
         else:
             return next_min_max
-
