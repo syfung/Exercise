@@ -84,49 +84,39 @@ def _sec_sma_helper(in_list):
     """
     if(len(in_list) == 1):
         if(isinstance(in_list[0], list)):
-            print("len 1" + in_list[0])
-            return _sec_sma_helper(in_list[0])
+            temp = _sec_sma_helper(in_list[0])
+            print("len 1, is list" + str(temp))
+            return temp
         else:
-            return [None, in_list[0]]
-        
-    if(len(in_list) == 2):
-        if(isinstance(in_list[0], list)):
-            a = _sec_sma_helper(in_list[0])
-        else:
-            a = in_list[0]
-        if(isinstance(in_list[1], list)):
-            b = _sec_sma_helper(in_list[1])
-        else:
-            b = in_list[1]
-
-            if(a > b):
-                return [b, a]
-            else:
-                return [a, b]
-
+            temp = [in_list[0], None]
+            print("len 1, not list" + str(temp))
+            return temp
     else:
         if(isinstance(in_list[0], list)):
-            print("else, list" + in_list)
-            first_element = _sec_sma_helper(in_list[0])
+            first = _sec_sma_helper(in_list[0])
+            print("len greater, first", first)
         else:
-            first_element = in_list[0]
-
+            first = [in_list[0], None]
+            print("len greater, first, list", first)
+        second = _sec_sma_helper(in_list[1:])
+        print("len greater, second" + str(second))
         
-        print("else, nextsmallest2" + str(in_list[1:]))
-        next_smallest2 = _sec_sma_helper(in_list[1:])
-        print(next_smallest2)
-
-        if(first_element >= next_smallest2[1]):
-            return next_smallest2
-
-        elif(first_element < next_smallest2[1] and
-             first_element >= next_smallest2[0]):
-            return [next_smallest2[0], first_element]
-
+        if(first[0] <= second[0]):
+            temp = [first[0], second[0]]
+            if(first[1] is not None):
+                if(first[1] <= temp[1]):
+                    temp[1] = first[1]
         else:
-            return [first_element, next_smallest2[0]]
+            temp = [second[0], first[0]]
+            if(second[1] is not None):
+                if(second[1] <= temp[1]):
+                    temp[1] = second[1]
+              
+        
+        print("temp: ", temp)
+        return temp
 
-
+            
 def sum_max_min(in_list):
     """(list) -> int
 
