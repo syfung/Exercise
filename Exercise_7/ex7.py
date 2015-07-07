@@ -100,7 +100,7 @@ def _sec_sma_helper(in_list):
             print("len greater, first, list", first)
         second = _sec_sma_helper(in_list[1:])
         print("len greater, second" + str(second))
-        
+
         if(first[0] <= second[0]):
             temp = [first[0], second[0]]
             if(first[1] is not None):
@@ -111,12 +111,11 @@ def _sec_sma_helper(in_list):
             if(second[1] is not None):
                 if(second[1] <= temp[1]):
                     temp[1] = second[1]
-              
-        
+
         print("temp: ", temp)
         return temp
 
-            
+
 def sum_max_min(in_list):
     """(list) -> int
 
@@ -132,17 +131,26 @@ def _sum_helper(in_list):
     Return [min, max]
     """
     if(len(in_list) == 1):
-        return [in_list[0], in_list[0]]
+        if(isinstance(in_list[0], list)):
+            return _sum_helper(in_list[0])
+        else:
+            return [in_list[0], in_list[0]]
 
     else:
-        first_element = in_list[0]
+
+        if(isinstance(in_list[0], list)):
+            first_element = _sum_helper(in_list[0])
+        else:
+            first_element = [in_list[0], in_list[0]]
+
         next_min_max = _sum_helper(in_list[1:])
 
-        if(first_element > next_min_max[1]):
-            return [next_min_max[0], first_element]
+        temp = next_min_max
 
-        elif(first_element < next_min_max[0]):
-            return [first_element, next_min_max[1]]
+        if(first_element[1] > next_min_max[1]):
+            temp[1] = first_element[1]
 
-        else:
-            return next_min_max
+        if(first_element[0] < next_min_max[0]):
+            temp[0] = first_element[0]
+
+        return temp
